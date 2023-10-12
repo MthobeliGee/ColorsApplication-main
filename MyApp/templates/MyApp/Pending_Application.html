@@ -1,0 +1,92 @@
+{% extends "MyApp/base.html" %}
+
+{% block content %}
+    {% load static %}
+    {% if messages %}
+        {% for message in messages %}
+            <br/>
+            <div>
+                <center>
+                    <div style="padding:1rem;  border:solid 2px #FF69B4; border-radius:15px; width:auto; display:flex; justify-content:center;align-centent:center;" class="alert {% if message.tags == 'success' %}alert-success{% elif message.tags == 'warning' %}alert-warning{% elif message.tags == 'error' %}alert-danger{% endif %}">
+                    <p >
+                        <b> {{ message }}</b>
+                    </p>
+                    </div>
+                </center>
+            </div>
+
+        {% endfor %}
+    {% endif %}
+ 
+<div class="container">
+    <center>
+
+
+        <div>
+            <h1>
+                Pending Application
+            </h1>
+
+<script>
+    $(document).ready(function() {
+        $('#application').DateTable();
+    });
+</script>
+
+
+                 <!--table-->
+                 <table class="table table-striped"id="application">
+                    <tbody>
+                        {%for Pending_application in application%}
+                      <tr>
+                        <th><b>{{application.EventName}}</b></th>
+                        <td><b>From:</b>{{application.StartDate}}</td>
+                        <td><b>To:</b><b>{{application.EndDate}}</b></td>
+                        <td>{{application.firstname}}</td>
+                        <td>{{application.Status}}</td>
+                      </tr>
+                      {%endfor%}
+                    </tbody>
+                  </table>
+                </div>
+            </div>
+
+{% comment %}  
+        </div>
+        <hr/>
+        <div>
+            <div style="display:flex; justify-content:space-between;padding:1rem">
+                <div>
+                    <h4><b>{{application.EventName}} application details</b></h4>
+                </div>
+                <div>
+                    <a href="{% url 'UpdateDetails' ApplicationId=application.ApplicationId %}" >
+                        <i class="fas fa-1x  fa-pencil-alt edit-icon"></i>
+                    </a>
+                </div>
+            </div>
+
+            <label><b>Event name: </b>{{application.EventName}}</label><br/>
+            <label><b>Start date: </b>{{application.StartDate}}</label><br/>
+            <label><b>End date: </b>{{application.EndDate}}</label><br/>
+            <label><b>Host city: </b>{{application.HostCity}}</label><br/>
+            <label><b>Host province: </b>{{application.HostProvince}}</label><br/>
+            <label><b>Number of team members: </b>{{application.NumberOfTeam}}</label><br/>
+            <label><b>Selection approved date: </b>{{application.SelectionApprovedDate}}</label><br/>
+            <label><b>Travel Date Time: </b>{{application.TravelDateTime}}</label><br/>
+            <label><b>Mode Of Travel: </b>{{application.ModeOfTravel}}</label><br/>
+
+
+        </div>
+
+        {% endcomment %}
+        <hr/>
+<script>
+
+    iframe = document.getElementById("iframe");
+    console.log(iframe);
+</script>
+{%endblock%}
+
+
+
